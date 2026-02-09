@@ -1,5 +1,6 @@
 "use client";
 import SeedPhaseGenScreen from "@/components/SeedPhaseGenScreen";
+import WalletScreen from "@/components/WalletScreen";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
       {!seedPhase ? (
         <SeedPhaseGenScreen setSeedPhase={setSeedPhase} />
       ) : (
-        <p>Your wallet is ready</p>
+        <WalletScreen seedPhase={seedPhase} />
       )}
     </div>
   );
