@@ -1,4 +1,4 @@
-import { seedPhaseGen } from "@/app/utils/wallet";
+import { getPrivatePublicKeyPair, seedPhaseGen } from "@/app/utils/wallet";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -11,8 +11,15 @@ export default function SeedPhaseGenScreen({
   setSeedPhase,
 }: SeedPhaseGenScreenProps) {
   const generateSeedPhaseOnClickHandler = () => {
-    setSeedPhase(seedPhaseGen().mnemonic);
-    localStorage.setItem("seed-phase", seedPhaseGen().mnemonic);
+    const { mnemonic, seed } = seedPhaseGen();
+
+    setSeedPhase(mnemonic);
+    localStorage.setItem("seed-phase", mnemonic);
+
+    // generate private public key
+    const solanaDerivationPath = `m/44'/501'/${0}'/0`;
+
+    // const {privateKey, publicKey} = getPrivatePublicKeyPair(solanaDerivationPath, seed)
   };
   return (
     <div className="flex flex-col gap-2 mx-4 md:mx-12 lg:mx-20 my-12 text-sm">
