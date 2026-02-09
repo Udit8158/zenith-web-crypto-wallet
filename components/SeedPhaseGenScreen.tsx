@@ -17,10 +17,23 @@ export default function SeedPhaseGenScreen({
     localStorage.setItem("seed-phase", mnemonic);
 
     // generate private public key
-    const solanaDerivationPath = `m/44'/501'/${0}'/0`;
+    const solanaDerivationPath = `m/44'/501'/${0}'/0'`;
+    const { privateKey, publicKey } = getPrivatePublicKeyPair(
+      solanaDerivationPath,
+      seed
+    );
 
-    // const {privateKey, publicKey} = getPrivatePublicKeyPair(solanaDerivationPath, seed)
+    const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
+    wallets.push({
+      privateKey,
+      publicKey,
+      path: solanaDerivationPath,
+      mnemonic,
+    });
+
+    localStorage.setItem("wallets", JSON.stringify(wallets));
   };
+
   return (
     <div className="flex flex-col gap-2 mx-4 md:mx-12 lg:mx-20 my-12 text-sm">
       <h1 className="font-extrabold text-2xl md:text-4xl ">
