@@ -5,16 +5,29 @@ import { Copy } from "lucide-react";
 import { Alert, AlertTitle } from "./ui/alert";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
+import Wallet from "./Wallet";
 
 interface WalletScreenProps {
   seedPhase: string;
 }
 
+interface Wallet {
+  privateKey: string;
+  publicKey: string;
+  path: string;
+  mnemonic: string;
+}
+
 export default function WalletScreen({ seedPhase }: WalletScreenProps) {
   const [mounted, setMounted] = useState(false);
+  const [wallets, setWallets] = useState<Array<Wallet>>([]);
 
   useEffect(() => {
     setMounted(true);
+
+    // get the wallets from local storage
+    const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
+    setWallets(wallets);
   }, []);
 
   const handleCopy = async () => {
@@ -61,7 +74,7 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
       </div>
 
       {/* Wallets */}
-      <div className="my-12">
+      <div className="my-12 flex flex-col gap-4 md:gap-12">
         <div className="flex flex-col md:flex-row gap-4 md:gap-1 md:items-center md:justify-between">
           <h1 className="font-extrabold text-4xl md:text-4xl">Solana Wallet</h1>
           <div className="flex gap-8 md:gap-2 items-center">
@@ -69,6 +82,15 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
             <Button variant={"destructive"}>Clear Wallets</Button>
           </div>
         </div>
+        {wallets.map((wallet, index) => {
+          return (
+            <Wallet
+              key={index}
+              privateKey={wallet.privateKey}
+              publicKey={wallet.publicKey}
+            />
+          );
+        })}
       </div>
     </div>
   );
