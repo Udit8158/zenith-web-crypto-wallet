@@ -44,7 +44,10 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
 
   const addWalletHandler = () => {
     try {
-      const pathIndex = wallets.length;
+      const pathIndex = parseInt(
+        localStorage.getItem("next-wallet-path-index") || "0"
+      );
+
       const solanaDerivationPath = `m/44'/501'/${pathIndex}'/0'`;
       const seed = mnemonicToSeedSync(seedPhase);
       const { privateKey, publicKey } = getPrivatePublicKeyPair(
@@ -61,6 +64,12 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
 
       setWallets((prev) => [...prev, newWallet]);
       localStorage.setItem("wallets", JSON.stringify([...wallets, newWallet]));
+
+      //   increment the path index
+      localStorage.setItem(
+        "next-wallet-path-index",
+        (pathIndex + 1).toString()
+      );
 
       toast.success("Wallet added successfully");
     } catch (error) {
@@ -115,6 +124,8 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
           return (
             <Wallet
               key={index}
+              wallets={wallets}
+              setWallets={setWallets}
               privateKey={wallet.privateKey}
               publicKey={wallet.publicKey}
               titleIndex={index + 1}
