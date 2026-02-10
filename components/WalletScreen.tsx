@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Item, ItemTitle } from "./ui/item";
-import { Copy } from "lucide-react";
-import { Alert, AlertTitle } from "./ui/alert";
+import { Copy, Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import Wallet from "./Wallet";
 import { getPrivatePublicKeyPair, WalletType } from "@/app/utils/wallet";
 import { mnemonicToSeedSync } from "bip39";
+import AlertDialogModal from "./AlertDialogModal";
 
 interface WalletScreenProps {
   seedPhase: string;
+  setSeedPhase: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 interface Wallet {
@@ -20,9 +21,14 @@ interface Wallet {
   mnemonic: string;
 }
 
-export default function WalletScreen({ seedPhase }: WalletScreenProps) {
+export default function WalletScreen({
+  seedPhase,
+  setSeedPhase,
+}: WalletScreenProps) {
   const [mounted, setMounted] = useState(false);
   const [wallets, setWallets] = useState<Array<Wallet>>([]);
+
+  const [showClearWalletsModal, setShowClearWalletsModal] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -78,6 +84,13 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
     }
   };
 
+  const clearWalletsHandler = () => {
+    setWallets([]);
+    localStorage.setItem("wallets", JSON.stringify([]));
+    toast.success("Wallets cleared successfully");
+    setShowClearWalletsModal(true);
+  };
+
   if (!mounted) return <div className="min-h-screen"></div>;
 
   return (
@@ -113,13 +126,28 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
 
       {/* Wallets */}
       <div className="my-12 flex flex-col gap-4 md:gap-12">
+        <AlertDialogModal
+          alertDialogTitle="Delete the seed phase too?"
+          alertDialogDescription="Your wallets are deleted, would you like to delete the seed phase too?"
+          showModal={showClearWalletsModal}
+          setShowModal={setShowClearWalletsModal}
+          actionButtonName="Delete"
+          icon={<Trash2Icon />}
+          actionFunction={() => {
+            localStorage.clear();
+            setSeedPhase(null); // to re rerender the paraten (page.tsx) to move back to the seed phase screen
+          }}
+        />
         <div className="flex flex-col md:flex-row gap-4 md:gap-1 md:items-center md:justify-between">
           <h1 className="font-extrabold text-4xl md:text-4xl">Solana Wallet</h1>
           <div className="flex gap-8 md:gap-2 items-center">
             <Button onClick={addWalletHandler}>Add Wallet</Button>
-            <Button variant={"destructive"}>Clear Wallets</Button>
+            <Button variant={"destructive"} onClick={clearWalletsHandler}>
+              Clear Wallets
+            </Button>
           </div>
         </div>
+
         {wallets.map((wallet, index) => {
           return (
             <Wallet
