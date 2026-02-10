@@ -64,6 +64,7 @@ export default function Wallet({
         showModal={showAlertPrivateKeyModal}
         setShowModal={setShowAlertPrivateKeyModal}
         actionButtonName="Show"
+        cancelButtonName="Cancel"
         icon={<EyeOff />}
         actionFunction={() => {
           setFullPrivateKeyVisible(true);
