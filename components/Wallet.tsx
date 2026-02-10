@@ -4,17 +4,23 @@ import { Copy, Delete, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import AlertPrivateKeyVisible from "./AlertPrivateKeyVisible";
+import { WalletType } from "@/app/utils/wallet";
 
 interface WalletProps {
   privateKey: string;
   publicKey: string;
   titleIndex: number;
+  wallets: WalletType[];
+  setWallets: React.Dispatch<React.SetStateAction<WalletType[]>>;
+  //   setWallets: (wallets: WalletType[]) => void;
 }
 
 export default function Wallet({
   publicKey,
   privateKey,
   titleIndex,
+  wallets,
+  setWallets,
 }: WalletProps) {
   const [fullPublicKeyVisible, setFullPublicKeyVisible] = useState(false);
   const [fullPrivateKeyVisible, setFullPrivateKeyVisible] = useState(false);
@@ -38,6 +44,17 @@ export default function Wallet({
     );
   };
 
+  const handleDeleteWallet = () => {
+    // const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
+
+    const newWallets = wallets.filter(
+      (wallet: WalletType) => wallet.publicKey !== publicKey
+    );
+
+    setWallets(newWallets); // for rendering in ui
+    localStorage.setItem("wallets", JSON.stringify(newWallets));
+  };
+
   return (
     <div className="flex flex-col gap-2 rounded-md border-accent border-2">
       <AlertPrivateKeyVisible
@@ -52,6 +69,7 @@ export default function Wallet({
           size={20}
           color="red"
           className="cursor-pointer hover:opacity-70 transition-all duration-300"
+          onClick={handleDeleteWallet}
         />
       </div>
       <div className="bg-accent flex flex-col gap-6 p-4 rounded-t-2xl">

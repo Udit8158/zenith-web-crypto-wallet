@@ -21,7 +21,9 @@ export default function SeedPhaseGenScreen({
     localStorage.setItem("seed-phase", mnemonic);
 
     // generate private public key
-    const solanaDerivationPath = `m/44'/501'/${0}'/0'`;
+    const pathIndex = 0;
+
+    const solanaDerivationPath = `m/44'/501'/${pathIndex}'/0'`;
     const { privateKey, publicKey } = getPrivatePublicKeyPair(
       solanaDerivationPath,
       seed
@@ -36,6 +38,7 @@ export default function SeedPhaseGenScreen({
     };
     wallets.push(newWallet);
 
+    localStorage.setItem("next-wallet-path-index", (pathIndex + 1).toString());
     localStorage.setItem("wallets", JSON.stringify(wallets));
   };
 
