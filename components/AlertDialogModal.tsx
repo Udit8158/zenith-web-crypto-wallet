@@ -8,37 +8,38 @@ import {
   AlertDialogHeader,
   AlertDialogMedia,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { EyeOff, Trash2Icon } from "lucide-react";
 
-interface AlertPrivateKeyVisibleProps {
+interface AlertDialogModalProps {
+  alertDialogTitle: string;
+  alertDialogDescription: string;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  setFullPrivateKeyVisible: (fullPrivateKeyVisible: boolean) => void;
+  actionFunction: () => void;
+  actionButtonName: string;
+  icon: React.ReactNode;
 }
 
-export default function AlertPrivateKeyVisible({
+export default function AlertDialogModal({
   showModal,
   setShowModal,
-  setFullPrivateKeyVisible,
-}: AlertPrivateKeyVisibleProps) {
+  actionFunction,
+  actionButtonName,
+  alertDialogTitle,
+  alertDialogDescription,
+  icon,
+}: AlertDialogModalProps) {
   return (
     <AlertDialog open={showModal}>
-      {/* <AlertDialogTrigger asChild>
-        <Button variant="destructive">Show Private Key</Button>
-      </AlertDialogTrigger> */}
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
           <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
             {/* <Trash2Icon /> */}
-            <EyeOff />
+            {icon}
           </AlertDialogMedia>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>{alertDialogTitle} </AlertDialogTitle>
           <AlertDialogDescription>
-            This will show your private key in UI, it's recommended to copy
-            only. It has been copied to your clipboard already
+            {alertDialogDescription}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -52,10 +53,10 @@ export default function AlertPrivateKeyVisible({
             variant="destructive"
             onClick={() => {
               setShowModal(false);
-              setFullPrivateKeyVisible(true);
+              actionFunction();
             }}
           >
-            Show
+            {actionButtonName}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

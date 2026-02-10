@@ -23,7 +23,7 @@ export default function Home() {
       {!seedPhase ? (
         <SeedPhaseGenScreen setSeedPhase={setSeedPhase} />
       ) : (
-        <WalletScreen seedPhase={seedPhase} />
+        <WalletScreen seedPhase={seedPhase} setSeedPhase={setSeedPhase} />
       )}
     </div>
   );

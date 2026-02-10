@@ -1,9 +1,9 @@
 "use client";
 
-import { Copy, Delete, Trash2Icon } from "lucide-react";
+import { Copy, EyeOff, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import AlertPrivateKeyVisible from "./AlertPrivateKeyVisible";
+import AlertPrivateKeyVisible from "./AlertDialogModal"; // you can change the import name
 import { WalletType } from "@/app/utils/wallet";
 
 interface WalletProps {
@@ -11,7 +11,7 @@ interface WalletProps {
   publicKey: string;
   titleIndex: number;
   wallets: WalletType[];
-  setWallets: React.Dispatch<React.SetStateAction<WalletType[]>>;
+  setWallets: React.Dispatch<React.SetStateAction<WalletType[]>>; // this is better way
   //   setWallets: (wallets: WalletType[]) => void;
 }
 
@@ -58,9 +58,16 @@ export default function Wallet({
   return (
     <div className="flex flex-col gap-2 rounded-md border-accent border-2">
       <AlertPrivateKeyVisible
+        alertDialogTitle="Are you sure?"
+        alertDialogDescription="This will show your private key in UI, it's recommended to copy
+            only. It has been copied to your clipboard already"
         showModal={showAlertPrivateKeyModal}
         setShowModal={setShowAlertPrivateKeyModal}
-        setFullPrivateKeyVisible={setFullPrivateKeyVisible}
+        actionButtonName="Show"
+        icon={<EyeOff />}
+        actionFunction={() => {
+          setFullPrivateKeyVisible(true);
+        }}
       />
       <div className="flex justify-between items-center p-4">
         <p className="text-2xl md:text-4xl font-bold">Wallet {titleIndex}</p>

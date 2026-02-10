@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Zenith - Crypto Wallet",
-  description: "Only crypto wallet you need",
+  title: "Zenith ⚡ Solana Wallet",
+  description: "Only solana wallet you need",
 };
 
 export default function RootLayout({
