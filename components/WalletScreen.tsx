@@ -34,8 +34,8 @@ export default function WalletScreen({
     setMounted(true);
 
     // get the wallets from local storage
-    const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
-    setWallets(wallets);
+    const savedWallets = JSON.parse(localStorage.getItem("wallets") || "[]");
+    setWallets(savedWallets);
   }, []);
 
   const handleCopy = async () => {
@@ -68,7 +68,6 @@ export default function WalletScreen({
         publicKey,
       };
 
-      setWallets((prev) => [...prev, newWallet]);
       localStorage.setItem("wallets", JSON.stringify([...wallets, newWallet]));
 
       //   increment the path index
@@ -77,6 +76,7 @@ export default function WalletScreen({
         (pathIndex + 1).toString()
       );
 
+      setWallets((prev) => [...prev, newWallet]);
       toast.success("Wallet added successfully");
     } catch (error) {
       toast.error("Failed to add wallet");
@@ -85,10 +85,15 @@ export default function WalletScreen({
   };
 
   const clearWalletsHandler = () => {
-    setWallets([]);
-    localStorage.setItem("wallets", JSON.stringify([]));
-    toast.success("Wallets cleared successfully");
-    setShowClearWalletsModal(true);
+    try {
+      localStorage.setItem("wallets", JSON.stringify([]));
+      setShowClearWalletsModal(true);
+      setWallets([]);
+      toast.success("Wallets cleared successfully");
+    } catch (error) {
+      toast.error("Failed to clear wallets");
+      console.error("Add wallet error: ", error);
+    }
   };
 
   if (!mounted) return <div className="min-h-screen"></div>;
@@ -132,6 +137,7 @@ export default function WalletScreen({
           showModal={showClearWalletsModal}
           setShowModal={setShowClearWalletsModal}
           actionButtonName="Delete"
+          cancelButtonName="No"
           icon={<Trash2Icon />}
           actionFunction={() => {
             localStorage.clear();
@@ -139,14 +145,26 @@ export default function WalletScreen({
           }}
         />
         <div className="flex flex-col md:flex-row gap-4 md:gap-1 md:items-center md:justify-between">
-          <h1 className="font-extrabold text-4xl md:text-4xl">Solana Wallet</h1>
+          <h1 className="font-extrabold text-4xl md:text-4xl">
+            Your Solana Wallets
+          </h1>
           <div className="flex gap-8 md:gap-2 items-center">
             <Button onClick={addWalletHandler}>Add Wallet</Button>
-            <Button variant={"destructive"} onClick={clearWalletsHandler}>
-              Clear Wallets
-            </Button>
+            {wallets.length === 0 ? (
+              <Button variant={"destructive"} disabled>
+                Clear Wallets
+              </Button>
+            ) : (
+              <Button variant={"destructive"} onClick={clearWalletsHandler}>
+                Clear Wallets
+              </Button>
+            )}
           </div>
         </div>
+
+        {wallets.length === 0 && (
+          <p className="text-center opacity-60">No wallets yet</p>
+        )}
 
         {wallets.map((wallet, index) => {
           return (

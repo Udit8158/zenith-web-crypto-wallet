@@ -17,6 +17,7 @@ interface AlertDialogModalProps {
   setShowModal: (showModal: boolean) => void;
   actionFunction: () => void;
   actionButtonName: string;
+  cancelButtonName: string;
   icon: React.ReactNode;
 }
 
@@ -25,6 +26,7 @@ export default function AlertDialogModal({
   setShowModal,
   actionFunction,
   actionButtonName,
+  cancelButtonName,
   alertDialogTitle,
   alertDialogDescription,
   icon,
@@ -47,7 +49,7 @@ export default function AlertDialogModal({
             variant="outline"
             onClick={() => setShowModal(false)}
           >
-            Cancel
+            {cancelButtonName}
           </AlertDialogCancel>
           <AlertDialogAction
             variant="destructive"

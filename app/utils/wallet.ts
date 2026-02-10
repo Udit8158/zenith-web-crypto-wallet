@@ -1,5 +1,5 @@
 import { Keypair } from "@solana/web3.js";
-import { generateMnemonic, mnemonicToSeedSync } from "bip39";
+import { generateMnemonic, mnemonicToSeedSync, validateMnemonic } from "bip39";
 import { derivePath } from "ed25519-hd-key";
 import nacl from "tweetnacl";
 import bs58 from "bs58";
@@ -16,6 +16,19 @@ export const seedPhaseGen = () => {
   const seed = mnemonicToSeedSync(mnemonic);
 
   return { mnemonic, seed };
+};
+
+export const seedGenFromMnemonic = (mnemonic: string) => {
+  try {
+    if (!validateMnemonic(mnemonic)) {
+      throw new Error("Invalid mnemonic");
+    }
+    const seed = mnemonicToSeedSync(mnemonic);
+    return { mnemonic, seed, error: null };
+  } catch (error) {
+    console.log(error);
+    return { mnemonic: "", seed: Buffer.from(""), error };
+  }
 };
 
 export const getPrivatePublicKeyPair = (path: string, seed: Buffer) => {
