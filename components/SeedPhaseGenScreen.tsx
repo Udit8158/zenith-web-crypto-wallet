@@ -1,4 +1,8 @@
-import { getPrivatePublicKeyPair, seedPhaseGen } from "@/app/utils/wallet";
+import {
+  getPrivatePublicKeyPair,
+  seedPhaseGen,
+  WalletType,
+} from "@/app/utils/wallet";
 import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -24,12 +28,13 @@ export default function SeedPhaseGenScreen({
     );
 
     const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
-    wallets.push({
+    const newWallet: WalletType = {
       privateKey,
       publicKey,
       path: solanaDerivationPath,
       mnemonic,
-    });
+    };
+    wallets.push(newWallet);
 
     localStorage.setItem("wallets", JSON.stringify(wallets));
   };

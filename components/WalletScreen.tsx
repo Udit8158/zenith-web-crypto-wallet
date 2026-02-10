@@ -6,6 +6,8 @@ import { Alert, AlertTitle } from "./ui/alert";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import Wallet from "./Wallet";
+import { getPrivatePublicKeyPair, WalletType } from "@/app/utils/wallet";
+import { mnemonicToSeedSync } from "bip39";
 
 interface WalletScreenProps {
   seedPhase: string;
@@ -37,6 +39,33 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
     } catch (error) {
       toast.error("Failed to copy to clipboard");
       console.error("Copy failed error: ", error);
+    }
+  };
+
+  const addWalletHandler = () => {
+    try {
+      const pathIndex = wallets.length;
+      const solanaDerivationPath = `m/44'/501'/${pathIndex}'/0'`;
+      const seed = mnemonicToSeedSync(seedPhase);
+      const { privateKey, publicKey } = getPrivatePublicKeyPair(
+        solanaDerivationPath,
+        seed
+      );
+
+      const newWallet: WalletType = {
+        path: solanaDerivationPath,
+        mnemonic: seedPhase,
+        privateKey,
+        publicKey,
+      };
+
+      setWallets((prev) => [...prev, newWallet]);
+      localStorage.setItem("wallets", JSON.stringify([...wallets, newWallet]));
+
+      toast.success("Wallet added successfully");
+    } catch (error) {
+      toast.error("Failed to add wallet");
+      console.error("Add wallet error: ", error);
     }
   };
 
@@ -78,7 +107,7 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
         <div className="flex flex-col md:flex-row gap-4 md:gap-1 md:items-center md:justify-between">
           <h1 className="font-extrabold text-4xl md:text-4xl">Solana Wallet</h1>
           <div className="flex gap-8 md:gap-2 items-center">
-            <Button>Add Wallet</Button>
+            <Button onClick={addWalletHandler}>Add Wallet</Button>
             <Button variant={"destructive"}>Clear Wallets</Button>
           </div>
         </div>
@@ -88,6 +117,7 @@ export default function WalletScreen({ seedPhase }: WalletScreenProps) {
               key={index}
               privateKey={wallet.privateKey}
               publicKey={wallet.publicKey}
+              titleIndex={index + 1}
             />
           );
         })}
