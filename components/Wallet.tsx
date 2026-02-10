@@ -8,9 +8,14 @@ import AlertPrivateKeyVisible from "./AlertPrivateKeyVisible";
 interface WalletProps {
   privateKey: string;
   publicKey: string;
+  titleIndex: number;
 }
 
-export default function Wallet({ publicKey, privateKey }: WalletProps) {
+export default function Wallet({
+  publicKey,
+  privateKey,
+  titleIndex,
+}: WalletProps) {
   const [fullPublicKeyVisible, setFullPublicKeyVisible] = useState(false);
   const [fullPrivateKeyVisible, setFullPrivateKeyVisible] = useState(false);
 
@@ -41,7 +46,7 @@ export default function Wallet({ publicKey, privateKey }: WalletProps) {
         setFullPrivateKeyVisible={setFullPrivateKeyVisible}
       />
       <div className="flex justify-between items-center p-4">
-        <p className="text-2xl md:text-4xl font-bold">Wallet 1</p>
+        <p className="text-2xl md:text-4xl font-bold">Wallet {titleIndex}</p>
 
         <Trash2Icon
           size={20}

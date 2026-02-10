@@ -4,6 +4,13 @@ import { derivePath } from "ed25519-hd-key";
 import nacl from "tweetnacl";
 import bs58 from "bs58";
 
+export interface WalletType {
+  privateKey: string;
+  publicKey: string;
+  mnemonic: string;
+  path: string;
+}
+
 export const seedPhaseGen = () => {
   const mnemonic = generateMnemonic();
   const seed = mnemonicToSeedSync(mnemonic);
