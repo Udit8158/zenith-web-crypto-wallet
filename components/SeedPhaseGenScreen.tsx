@@ -90,8 +90,8 @@ export default function SeedPhaseGenScreen({
   };
 
   return (
-    <div className="flex flex-col gap-2 mx-4 md:mx-12 lg:mx-20 my-12 text-sm">
-      <h1 className="font-extrabold text-2xl md:text-4xl ">
+    <div className="flex flex-col gap-2 mx-3 sm:mx-4 md:mx-12 lg:mx-20 my-6 sm:my-8 md:my-12 text-sm">
+      <h1 className="font-extrabold text-xl sm:text-2xl md:text-4xl">
         Secret Recovery Phrase
       </h1>
       <p className="opacity-60">Save these words in a safe place.</p>

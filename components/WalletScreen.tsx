@@ -99,10 +99,10 @@ export default function WalletScreen({
   if (!mounted) return <div className="min-h-screen"></div>;
 
   return (
-    <div className="py-12 px-8 md:px-14 lg:px-50 xl:px-70 flex flex-col gap-4">
-      <div className="border-accent border-2 p-8 rounded-md flex flex-col gap-4">
+    <div className="py-6 sm:py-8 md:py-12 px-4 sm:px-6 md:px-14 lg:px-50 xl:px-70 flex flex-col gap-4">
+      <div className="border-accent border-2 p-4 sm:p-6 md:p-8 rounded-md flex flex-col gap-4">
         <div className="">
-          <h1 className="font-extrabold text-2xl md:text-4xl">
+          <h1 className="font-extrabold text-xl sm:text-2xl md:text-4xl">
             Your secret phase
           </h1>
           <p className="opacity-60 text-sm">Keep this secret 🤫</p>
@@ -115,7 +115,7 @@ export default function WalletScreen({
                 className="cursor-pointer hover:bg-accent transition-all duration-300"
                 key={index}
               >
-                <ItemTitle className="md:text-lg lg:text-xl">{word}</ItemTitle>
+                <ItemTitle className="text-sm sm:text-base md:text-lg">{word}</ItemTitle>
               </Item>
             );
           })}
@@ -145,7 +145,7 @@ export default function WalletScreen({
           }}
         />
         <div className="flex flex-col md:flex-row gap-4 md:gap-1 md:items-center md:justify-between">
-          <h1 className="font-extrabold text-4xl md:text-4xl">
+          <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl">
             Your Solana Wallets
           </h1>
           <div className="flex gap-8 md:gap-2 items-center">
