@@ -1,0 +1,109 @@
+"use client";
+import { useState } from "react";
+import { ChevronDown, Copy } from "lucide-react";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Item, ItemTitle } from "@/components/ui/item";
+import { cn } from "@/lib/utils";
+
+interface SeedPhaseDropdownProps {
+  seedPhase: string;
+}
+
+export default function SeedPhaseDropdown({
+  seedPhase,
+}: SeedPhaseDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(seedPhase);
+      toast.success("Copied to clipboard");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      toast.error("Failed to copy to clipboard");
+      console.error("Copy failed error: ", error);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-3">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" className="w-full justify-between h-12">
+            <span className="text-base font-medium">Secret Recovery Phrase</span>
+            <ChevronDown
+              className={cn(
+                "transition-transform duration-300",
+                isOpen && "rotate-180"
+              )}
+              size={20}
+            />
+          </Button>
+        </CollapsibleTrigger>
+
+        <CollapsibleContent className="mt-3">
+          <div
+            className={cn(
+              "overflow-hidden transition-all duration-300 ease-in-out",
+              isOpen
+                ? "max-h-[1000px] opacity-100"
+                : "max-h-0 opacity-0"
+            )}
+          >
+            <Card className="border-accent border-2">
+              <CardHeader>
+                <CardTitle className="text-xl sm:text-2xl">
+                  Your Secret Phase
+                </CardTitle>
+                <CardDescription className="text-sm sm:text-base">
+                  Keep this secret 🤫
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pb-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                  {seedPhase.split(" ").map((word, index) => (
+                    <Item
+                      variant="muted"
+                      className="cursor-pointer hover:bg-accent transition-all duration-300"
+                      key={index}
+                    >
+                      <ItemTitle className="text-sm sm:text-base md:text-lg">
+                        {word}
+                      </ItemTitle>
+                    </Item>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
+      <Button
+        onClick={handleCopy}
+        className={cn(
+          "w-full gap-2 transition-all duration-300",
+          copied && "bg-primary/90"
+        )}
+      >
+        <Copy size={16} />
+        <span>{copied ? "Copied!" : "Copy to clipboard"}</span>
+      </Button>
+    </div>
+  );
+}
