@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { ChevronDown, Copy } from "lucide-react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
@@ -33,7 +32,9 @@ export default function SeedPhaseDropdown({
       await navigator.clipboard.writeText(seedPhase);
       toast.success("Copied to clipboard");
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch (error) {
       toast.error("Failed to copy to clipboard");
       console.error("Copy failed error: ", error);
@@ -44,8 +45,8 @@ export default function SeedPhaseDropdown({
     <div className="flex flex-col gap-3">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
-          <Button variant="outline" className="w-full justify-between h-12">
-            <span className="text-base font-medium">Secret Recovery Phrase</span>
+          <button className="w-full h-12 px-4 py-2 rounded-md border bg-background text-base font-medium transition-all hover:bg-accent hover:text-accent-foreground focus-visible:border-ring focus-visible:ring-[3px] flex items-center justify-between">
+            <span>Secret Recovery Phrase</span>
             <ChevronDown
               className={cn(
                 "transition-transform duration-300",
@@ -53,7 +54,7 @@ export default function SeedPhaseDropdown({
               )}
               size={20}
             />
-          </Button>
+          </button>
         </CollapsibleTrigger>
 
         <CollapsibleContent className="mt-3">
@@ -94,16 +95,16 @@ export default function SeedPhaseDropdown({
         </CollapsibleContent>
       </Collapsible>
 
-      <Button
-        onClick={handleCopy}
+      <div
         className={cn(
-          "w-full gap-2 transition-all duration-300",
-          copied && "bg-primary/90"
+          "flex gap-2 items-center cursor-pointer opacity-60 text-sm hover:opacity-100 transition-all duration-300",
+          copied && "text-primary font-medium"
         )}
+        onClick={handleCopy}
       >
         <Copy size={16} />
-        <span>{copied ? "Copied!" : "Copy to clipboard"}</span>
-      </Button>
+        <p>{copied ? "Copied!" : "Copy to clipboard"}</p>
+      </div>
     </div>
   );
 }
