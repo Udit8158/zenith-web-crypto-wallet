@@ -44,13 +44,13 @@ export default function SeedPhaseDropdown({
   return (
     <div className="flex flex-col gap-3">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger asChild>
+        <CollapsibleTrigger asChild className="cursor-pointer">
           <button className="w-full h-12 px-4 py-2 rounded-md border bg-background text-base font-medium transition-all hover:bg-accent hover:text-accent-foreground focus-visible:border-ring focus-visible:ring-[3px] flex items-center justify-between">
             <span>Secret Recovery Phrase</span>
             <ChevronDown
               className={cn(
                 "transition-transform duration-300",
-                isOpen && "rotate-180"
+                isOpen && "rotate-180",
               )}
               size={20}
             />
@@ -61,9 +61,7 @@ export default function SeedPhaseDropdown({
           <div
             className={cn(
               "overflow-hidden transition-all duration-300 ease-in-out",
-              isOpen
-                ? "max-h-[1000px] opacity-100"
-                : "max-h-0 opacity-0"
+              isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0",
             )}
           >
             <Card className="border-accent border-2">
@@ -97,8 +95,8 @@ export default function SeedPhaseDropdown({
 
       <div
         className={cn(
-          "flex gap-2 items-center cursor-pointer opacity-60 text-sm hover:opacity-100 transition-all duration-300",
-          copied && "text-primary font-medium"
+          "flex gap-2 items-center justify-center cursor-pointer opacity-60 text-sm hover:opacity-100 transition-all duration-300",
+          copied && "text-primary font-medium",
         )}
         onClick={handleCopy}
       >
