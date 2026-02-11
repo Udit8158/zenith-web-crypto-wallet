@@ -71,7 +71,7 @@ export default function Wallet({
         }}
       />
       <div className="flex justify-between items-center p-4">
-        <p className="text-2xl md:text-4xl font-bold">Wallet {titleIndex}</p>
+        <p className="text-lg sm:text-xl md:text-3xl font-bold">Wallet {titleIndex}</p>
 
         <Trash2Icon
           size={20}
@@ -80,13 +80,13 @@ export default function Wallet({
           onClick={handleDeleteWallet}
         />
       </div>
-      <div className="bg-accent flex flex-col gap-6 p-4 rounded-t-2xl">
+      <div className="bg-accent flex flex-col gap-3 sm:gap-4 md:gap-6 p-3 sm:p-4 rounded-t-2xl">
         {/* Public key */}
         <div className="flex flex-col gap-1">
-          <p className="text-lg md:text-2xl font-bold">Public Key</p>
-          <div className="flex justify-between items-center gap-8">
+          <p className="text-base sm:text-lg md:text-xl font-bold">Public Key</p>
+          <div className="flex justify-between items-center gap-3 sm:gap-4 md:gap-8">
             <p
-              className="text-sm md:text-lg opacity-70 break-all cursor-pointer hover:opacity-100 transition-all duration-300"
+              className="text-xs sm:text-sm md:text-base opacity-70 break-all cursor-pointer hover:opacity-100 transition-all duration-300"
               onClick={() => {
                 setFullPublicKeyVisible(!fullPublicKeyVisible);
                 handleCopy("publicKey");
@@ -107,10 +107,10 @@ export default function Wallet({
         </div>
         {/* Private key */}
         <div className="flex flex-col gap-1">
-          <p className="text-lg md:text-2xl font-bold">Private Key</p>
-          <div className="flex justify-between items-start gap-8">
+          <p className="text-base sm:text-lg md:text-xl font-bold">Private Key</p>
+          <div className="flex justify-between items-start gap-3 sm:gap-4 md:gap-8">
             <p
-              className="text-sm md:text-lg opacity-70 break-all cursor-pointer hover:opacity-100 transition-all duration-300 "
+              className="text-xs sm:text-sm md:text-base opacity-70 break-all cursor-pointer hover:opacity-100 transition-all duration-300"
               onClick={() => {
                 handleCopy("privateKey");
 
