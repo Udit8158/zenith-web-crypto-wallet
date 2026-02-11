@@ -57,39 +57,32 @@ export default function SeedPhaseDropdown({
           </button>
         </CollapsibleTrigger>
 
-        <CollapsibleContent className="mt-3">
-          <div
-            className={cn(
-              "overflow-hidden transition-all duration-300 ease-in-out",
-              isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0",
-            )}
-          >
-            <Card className="border-accent border-2">
-              <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl">
-                  Your Secret Phase
-                </CardTitle>
-                <CardDescription className="text-sm sm:text-base">
-                  Keep this secret 🤫
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pb-6">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {seedPhase.split(" ").map((word, index) => (
-                    <Item
-                      variant="muted"
-                      className="cursor-pointer hover:bg-accent transition-all duration-300"
-                      key={index}
-                    >
-                      <ItemTitle className="text-sm sm:text-base md:text-lg">
-                        {word}
-                      </ItemTitle>
-                    </Item>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        <CollapsibleContent className="mt-3 overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:max-h-0 data-[state=closed]:opacity-0 data-[state=open]:max-h-[1000px] data-[state=open]:opacity-100">
+          <Card className="border-accent border-2">
+            <CardHeader>
+              <CardTitle className="text-xl sm:text-2xl">
+                Your Secret Phase
+              </CardTitle>
+              <CardDescription className="text-sm sm:text-base">
+                Keep this secret 🤫
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pb-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                {seedPhase.split(" ").map((word, index) => (
+                  <Item
+                    variant="muted"
+                    className="cursor-pointer hover:bg-accent transition-all duration-300"
+                    key={index}
+                  >
+                    <ItemTitle className="text-sm sm:text-base md:text-lg">
+                      {word}
+                    </ItemTitle>
+                  </Item>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </CollapsibleContent>
       </Collapsible>
 
