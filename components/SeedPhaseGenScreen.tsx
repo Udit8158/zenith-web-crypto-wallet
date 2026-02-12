@@ -40,7 +40,7 @@ export default function SeedPhaseGenScreen({
       const solanaDerivationPath = `m/44'/501'/${pathIndex}'/0'`;
       const { privateKey, publicKey } = getPrivatePublicKeyPair(
         solanaDerivationPath,
-        seed
+        seed,
       );
 
       const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
@@ -54,7 +54,7 @@ export default function SeedPhaseGenScreen({
 
       localStorage.setItem(
         "next-wallet-path-index",
-        (pathIndex + 1).toString()
+        (pathIndex + 1).toString(),
       );
       localStorage.setItem("wallets", JSON.stringify(wallets));
 
@@ -73,7 +73,7 @@ export default function SeedPhaseGenScreen({
     const solanaDerivationPath = `m/44'/501'/${pathIndex}'/0'`;
     const { privateKey, publicKey } = getPrivatePublicKeyPair(
       solanaDerivationPath,
-      seed
+      seed,
     );
 
     const wallets = JSON.parse(localStorage.getItem("wallets") || "[]");
@@ -90,9 +90,9 @@ export default function SeedPhaseGenScreen({
   };
 
   return (
-    <div className="flex flex-col gap-2 mx-3 sm:mx-4 md:mx-12 lg:mx-20 my-6 sm:my-8 md:my-12 text-sm">
-      <h1 className="font-extrabold text-xl sm:text-2xl md:text-4xl">
-        Secret Recovery Phrase
+    <div className="flex flex-col gap-2 mx-2 sm:mx-4 md:mx-12 lg:mx-20 my-6 sm:my-8 md:my-12 text-sm">
+      <h1 className="font-extrabold text-lg sm:text-xl md:text-4xl">
+        Create or import your solana wallet
       </h1>
       <p className="opacity-60">Save these words in a safe place.</p>
       <div className="flex flex-col md:flex-row gap-4 items-center">
