@@ -57,7 +57,7 @@ export default function SeedPhaseDropdown({
           </button>
         </CollapsibleTrigger>
 
-        <CollapsibleContent className="mt-3 overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:max-h-0 data-[state=closed]:opacity-0 data-[state=open]:max-h-[1000px] data-[state=open]:opacity-100">
+        <CollapsibleContent className="mt-3 overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:max-h-0 data-[state=closed]:opacity-0 data-[state=open]:max-h-250 data-[state=open]:opacity-100">
           <Card className="border-accent border-2">
             <CardHeader>
               <CardTitle className="text-xl sm:text-2xl">

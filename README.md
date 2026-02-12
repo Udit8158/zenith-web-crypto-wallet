@@ -38,35 +38,6 @@ https://zenith-crypto-wallet.vercel.app/
 
 ## 📖 User Guide
 
-### User Flow
-
-```
-┌─────────────────────────────────────────────┐
-│                                     │
-│   1. Generate Seed Phrase            │
-│      or Import Existing One           │
-│                                     │
-│   2. Seed Phase Created             │
-│      (12 BIP39 Words)               │
-│                                     │
-│   3. Copy to Clipboard              │
-│      (Always Available)               │
-│                                     │
-│   4. Add More Wallets               │
-│      (Optional)                      │
-│                                     │
-│   5. View/Copy Keys                │
-│      Public & Private Keys             │
-│                                     │
-│   6. Delete Wallets                 │
-│      (Individual or All)            │
-│                                     │
-│   7. Clear All Data                 │
-│      (Reset to Beginning)            │
-│                                     │
-└─────────────────────────────────────────────┘
-```
-
 ### Step-by-Step Guide
 
 #### 1. **Generate or Import Seed Phrase**
@@ -104,6 +75,8 @@ https://zenith-crypto-wallet.vercel.app/
 - Clearing all wallets will prompt to also delete the seed phrase
 - This returns you to the beginning (step 1)
 
+#### When you add a new wallet, after deleting a wallet, we will not create that deleted wallet again (just to fill the derivation key gap). We assume you intended to delete the wallet as the wallet was compromised or something.
+
 ---
 
 ## 🛠️ Developer Guide
@@ -123,41 +96,7 @@ https://zenith-crypto-wallet.vercel.app/
 | **Sonner**         | 2.0.7   | Toast notifications                         |
 | **Lucide React**   | Latest  | Icon library                                |
 
-### Project Structure
-
-```
-web-wallet/
-├── app/                      # Next.js app router
-│   ├── page.tsx             # Home page (mounted check, screen switching)
-│   ├── utils/                # Utility functions
-│   │   └── wallet.ts        # Wallet generation, key derivation helpers
-│   └── globals.css           # Global styles, Tailwind config
-├── components/                # React components
-│   ├── SeedPhaseGenScreen.tsx      # Seed phrase generation screen
-│   ├── WalletScreen.tsx              # Wallet management screen
-│   ├── Wallet.tsx                   # Individual wallet card component
-│   ├── SeedPhaseDropdown.tsx         # Collapsible seed phrase (experimental)
-│   ├── AlertDialogModal.tsx           # Reusable confirmation dialog
-│   └── ui/                         # shadcn/ui components
-│       ├── button.tsx
-│       ├── card.tsx
-│       ├── collapsible.tsx
-│       ├── input.tsx
-│       ├── alert-dialog.tsx
-│       ├── item.tsx
-│       └── ...
-├── lib/                      # Utility libraries
-│   └── utils.ts           # cn() helper for Tailwind class merging
-└── public/                   # Static assets
-```
-
 ### Setup Guide
-
-#### Prerequisites
-
-- **Node.js**: v18.17 or higher
-- **pnpm**: Latest version (recommended)
-- **Git**: For version control
 
 #### Installation
 
@@ -175,39 +114,7 @@ pnpm install
 ```bash
 # Start development server with hot reload
 pnpm run dev
-
-# Build for production
-pnpm run build
-
-# Start production server (after build)
-pnpm run start
-
-# Run ESLint
-pnpm run lint
 ```
-
-#### Adding Components
-
-```bash
-# Add new shadcn/ui component
-pnpm dlx shadcn@latest add [component-name]
-
-# Example: Add Accordion component
-pnpm dlx shadcn@latest add accordion
-
-# Example: Add Dialog component
-pnpm dlx shadcn@latest add dialog
-```
-
-#### Key Files
-
-| File                                | Description                                                      |
-| ----------------------------------- | ---------------------------------------------------------------- |
-| `app/utils/wallet.ts`               | Core wallet utilities: `seedPhaseGen`, `getPrivatePublicKeyPair` |
-| `components/SeedPhaseGenScreen.tsx` | Initial screen - seed phrase generation/import                   |
-| `components/WalletScreen.tsx`       | Main screen - wallet list, add/clear actions                     |
-| `components/Wallet.tsx`             | Individual wallet card - key display, visibility toggle          |
-| `components/SeedPhaseDropdown.tsx`  | Experimental - collapsible seed phrase with animation            |
 
 ---
 
@@ -220,36 +127,6 @@ pnpm dlx shadcn@latest add dialog
 3. **HTTPS Required**: Production must use HTTPS for clipboard API on mobile
 4. **No Server**: This is a client-side only wallet - no server communication
 5. **Custodial**: You have full control - funds are never held by any third party
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Commit Convention
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat:` - New feature
-- `fix:` - Bug fix
-- `refactor:` - Code refactoring
-- `docs:` - Documentation changes
-- `style:` - Code style changes
-- `test:` - Adding tests
-- `chore:` - Maintenance tasks
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
