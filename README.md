@@ -1,52 +1,38 @@
 <div align="center">
 
-  # ⚡ Zenith - Solana Web Wallet
+# ⚡ Zenith - Solana Web Wallet
 
-  ![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=for-the-badge&logo=next.js&logoColor=FFFFFF)
-  ![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=for-the-badge&logo=react&logoColor=61DAFB)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=3178C6)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=38BDF8)
-  ![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=for-the-badge&logo=next.js&logoColor=FFFFFF)
+![React](https://img.shields.io/badge/React-19.2.3-61DAFB?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=3178C6)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=38BDF8)
+![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-  **Your secure, non-custodial Solana wallet in the browser**
+**Your secure, non-custodial Solana wallet in the browser**
 
-  [Live Demo](#) • [Report Bug](#) • [Feature Request](#)
+[Live Web App](https://zenith-crypto-wallet.vercel.app/)
 
 </div>
 
 ---
 
-## 🌟 Features
+## Features
 
-- 🔐 **Secure Seed Phrase Generation** - Generate new 12-word BIP39 seed phrases or import existing ones
-- 💼 **Multi-Wallet Support** - Create and manage multiple Solana wallets from a single seed phrase
-- 🔑 **Key Management** - View and copy public/private keys with visibility toggles
-- 🌓 **Dark Mode** - Beautiful dark-themed interface (default)
-- 📱 **Mobile-First Design** - Responsive UI optimized for mobile devices
-- ✨ **Smooth Animations** - Elegant dropdown transitions and hover effects
-- 💾 **Local Storage** - All data stored securely in your browser
-- 🔐 **BIP44 Derivation** - Standard Solana derivation path: `m/44'/501'/account'/0'`
+- **Secure Seed Phrase Generation** - Generate new 12-word BIP39 seed phrases or import existing ones
+- **Multi-Wallet Support** - Create and manage multiple Solana wallets from a single seed phrase
+- **Key Management** - View and copy public/private keys with visibility toggles
+- **Dark Mode** - Beautiful dark-themed interface (default)
+- **Mobile-First Design** - Responsive UI optimized for mobile devices
+- **Local Storage** - All data stored securely in your browser
+- **BIP44 Derivation** - Standard Solana derivation path: `m/44'/501'/account'/0'`
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### For Users
 
-```bash
-# Clone the repository
-git clone https://github.com/Udit8158/zenith-web-crypto-wallet.git
-cd zenith-web-crypto-wallet
-
-# Install dependencies
-pnpm install
-
-# Run development server
-pnpm run dev
-
-# Open in browser
-# Navigate to http://localhost:3000
-```
+https://zenith-crypto-wallet.vercel.app/
 
 ---
 
@@ -124,18 +110,18 @@ pnpm run dev
 
 ### Tech Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Next.js** | 16.1.6 | React framework with App Router & Turbopack |
-| **React** | 19.2.3 | UI library |
-| **TypeScript** | 5.0 | Type safety |
-| **Tailwind CSS** | 4 | Utility-first CSS framework |
-| **shadcn/ui** | Latest | Component library (Radix UI primitives) |
-| **Solana Web3.js** | 1.98.4 | Solana blockchain integration |
-| **BIP39** | 3.1.0 | Seed phrase generation/validation |
-| **ed25519-hd-key** | 1.3.0 | Key derivation |
-| **Sonner** | 2.0.7 | Toast notifications |
-| **Lucide React** | Latest | Icon library |
+| Technology         | Version | Purpose                                     |
+| ------------------ | ------- | ------------------------------------------- |
+| **Next.js**        | 16.1.6  | React framework with App Router & Turbopack |
+| **React**          | 19.2.3  | UI library                                  |
+| **TypeScript**     | 5.0     | Type safety                                 |
+| **Tailwind CSS**   | 4       | Utility-first CSS framework                 |
+| **shadcn/ui**      | Latest  | Component library (Radix UI primitives)     |
+| **Solana Web3.js** | 1.98.4  | Solana blockchain integration               |
+| **BIP39**          | 3.1.0   | Seed phrase generation/validation           |
+| **ed25519-hd-key** | 1.3.0   | Key derivation                              |
+| **Sonner**         | 2.0.7   | Toast notifications                         |
+| **Lucide React**   | Latest  | Icon library                                |
 
 ### Project Structure
 
@@ -182,12 +168,6 @@ cd zenith-web-crypto-wallet
 
 # Install dependencies
 pnpm install
-
-# Or with npm
-npm install
-
-# Or with yarn
-yarn install
 ```
 
 #### Development
@@ -221,45 +201,17 @@ pnpm dlx shadcn@latest add dialog
 
 #### Key Files
 
-| File | Description |
-|------|-------------|
-| `app/utils/wallet.ts` | Core wallet utilities: `seedPhaseGen`, `getPrivatePublicKeyPair` |
-| `components/SeedPhaseGenScreen.tsx` | Initial screen - seed phrase generation/import |
-| `components/WalletScreen.tsx` | Main screen - wallet list, add/clear actions |
-| `components/Wallet.tsx` | Individual wallet card - key display, visibility toggle |
-| `components/SeedPhaseDropdown.tsx` | Experimental - collapsible seed phrase with animation |
+| File                                | Description                                                      |
+| ----------------------------------- | ---------------------------------------------------------------- |
+| `app/utils/wallet.ts`               | Core wallet utilities: `seedPhaseGen`, `getPrivatePublicKeyPair` |
+| `components/SeedPhaseGenScreen.tsx` | Initial screen - seed phrase generation/import                   |
+| `components/WalletScreen.tsx`       | Main screen - wallet list, add/clear actions                     |
+| `components/Wallet.tsx`             | Individual wallet card - key display, visibility toggle          |
+| `components/SeedPhaseDropdown.tsx`  | Experimental - collapsible seed phrase with animation            |
 
 ---
 
-## 📦 Available Scripts
-
-```bash
-# Development
-pnpm run dev           # Start Next.js dev server (localhost:3000)
-pnpm run build         # Create optimized production build
-pnpm run start         # Start production server
-
-# Code Quality
-pnpm run lint          # Run ESLint on TypeScript/TSX files
-```
-
----
-
-## 🎨 Styling
-
-This project uses:
-
-- **Tailwind CSS v4** - Utility-first CSS framework
-- **shadcn/ui** - Beautiful, accessible component library
-- **Dark Mode** - Enabled by default with `dark` class on `<body>`
-- **Responsive Design** - Mobile-first approach with breakpoints:
-  - `sm:` (640px+)
-  - `md:` (768px+)
-  - `lg:` (1024px+)
-
----
-
-## 🔐 Security Considerations
+## Security Considerations
 
 > ⚠️ **Important Security Notes**
 
@@ -271,41 +223,7 @@ This project uses:
 
 ---
 
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Or connect your GitHub repo for auto-deployment
-# https://vercel.com/new
-```
-
-### Other Platforms
-
-- **Netlify**: Connect repo → Deploy
-- **Render**: Connect repo → Deploy
-- **Railway**: Connect repo → Deploy
-
----
-
-## 🐛 Known Issues & Limitations
-
-| Issue | Status | Note |
-|--------|--------|-------|
-| **Mobile Clipboard API** | ⚠️ | May fail on non-HTTPS sites. Implemented fallback for mobile browsers |
-| **LocalStorage Quota** | ℹ️ | Limited by browser (usually 5-10MB) |
-| **No Transaction Signing** | 🚧 | Currently wallet only - transaction features planned |
-| **No Multi-Chain** | ℹ️ | Solana only (Ethereum support experimental) |
-
----
-
-## 🧪 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -329,34 +247,12 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- [Next.js](https://nextjs.org/) - React framework
-- [shadcn/ui](https://ui.shadcn.com/) - Component library
-- [Radix UI](https://www.radix-ui.com/) - Unstyled component primitives
-- [Lucide](https://lucide.dev/) - Beautiful icons
-- [Solana](https://solana.com/) - Blockchain network
-
----
-
-## 📞 Support
-
-- 🐛 [Report Bugs](https://github.com/Udit8158/zenith-web-crypto-wallet/issues)
-- 💡 [Feature Requests](https://github.com/Udit8158/zenith-web-crypto-wallet/issues)
-- 💬 [Discussions](https://github.com/Udit8158/zenith-web-crypto-wallet/discussions)
-
----
-
-<div align="center">
-
-  **Made with ❤️ using [Next.js](https://nextjs.org/) & [shadcn/ui](https://ui.shadcn.com/)**
-
-  [⬆ Back to Top](#readme-zenith---solana-web-wallet)
-
-</div>
+- [Kosh](https://wallet-kosh.vercel.app/) - Inspiration for this project
